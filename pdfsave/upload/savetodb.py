@@ -1,13 +1,18 @@
 from docx import Document
-import json
+# import json
 import pymysql.cursors
+# from pathlib import Path
+from django.conf import settings
+from .models import Upload
 
 res = dict()
 
+filepath = settings.MEDIA_ROOT
+
 
 def savetodb():
-    document = Document(
-        '/home/mathew/project/Japhe/pdfsave/upload/871919 - RIVERSIDE HOSTELS SERVICES-2-converted.docx')
+    print("Process Started")
+    document = Document(filepath + '/data.docx')
     tables = document.tables
 
     tab = []
@@ -65,9 +70,15 @@ def savetodb():
         # your changes.
         connection.commit()
 
+
         with connection.cursor() as cursor:
             # Read a single record
             sql = "SELECT `Receipt_No` FROM `transactions` WHERE `Paid_In`=%s"
             cursor.execute(sql, ('500.00',))
             result = cursor.fetchone()
             print(result)
+            # Upload.objects.all().delete()
+
+
+if __name__ == '__main__':
+	savetodb()

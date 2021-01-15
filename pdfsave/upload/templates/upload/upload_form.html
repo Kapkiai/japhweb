@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      TEST EMBED
+    </title>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+
+  </head>
+  <body class="works_on_smartphone">
+  	
+
+    <header>
+      
+      
+  	</header>
+  	<main>
+      <div style="padding:40px;margin:40px;border:1px solid #ccc">
+    <h1>Django File Upload</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+    {% if documents %}
+    <button><a href="http://127.0.0.1:8000/upload">Upload To db</a></button>
+    {% endif %}
+    <ul>
+    <!-- {% for document in documents %}
+        <li>
+            <a href="{{ document.upload_file.url }}">{{ document.upload_file.name }}</a>
+            <small>({{ document.upload_file.size|filesizeformat }}) - {{document.upload_date}}</small>
+        </li>
+    {% endfor %} -->
+    </ul>
+</div>
+
+     <!--  <p>TEST #1 with iframe tag</p>
+  		<iframe src="https://products.aspose.app/pdf/conversion/pdf-to-docx" width="100%" height="300">
+  <p>Your browser does not support iframes.</p>
+</iframe>
+<p>TEST #2 with embed tag</p>
+<embed src="https://products.aspose.app/pdf/conversion/pdf-to-docx" style="width:500px; height: 300px;">
+ -->
+  	</main>
+ 
+
+  </body>
+</html>
