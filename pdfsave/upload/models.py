@@ -7,7 +7,7 @@ class Upload(models.Model):
 
     def save(self, *args, **kwargs):
         # randomNum = random.randint(10000, 90000)
-        new_name = "data" + ".docx"
+        new_name = "data" + ".pdf"
         self.upload_file.name = new_name
         super(Upload, self).save(*args, **kwargs)
 
