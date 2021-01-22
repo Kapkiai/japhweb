@@ -1,13 +1,20 @@
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from .models import Upload
+from .models import Upload, Transactions
 from django.conf import settings
 from pathlib import Path
 from . import savetodb as a
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from rest_framework.parsers import JSONParser
 import datetime
 import threading
 from django.shortcuts import render
+# REST
+from .serializers import TransactionsSerializer
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework import generics
 
 
 filepath = settings.MEDIA_ROOT
@@ -44,3 +51,15 @@ def updatedb():
             Upload.objects.all().delete()
         except Exception as t:
             print("Error", t)
+
+# @api_view(['GET',])
+# def data(request, format=None):
+#     if request.method == 'GET':
+#         tranc = Transactions.objects.all()
+#         serializer = TransactionsSerializer(tranc, many=True)
+#         return Response(serializer.data)
+
+
+class TransactionsList(generics.ListCreateAPIView):
+    queryset = Transactions.objects.all()
+    serializer_class = TransactionsSerializer
